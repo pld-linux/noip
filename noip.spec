@@ -47,7 +47,7 @@ mv -f %{name}2.c %{name}.c
 %{__make} \
 	PREFIX=%{_prefix} CONFDIR=%{_sysconfdir} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}"
+	CCFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,5 +63,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.FIRST
-%attr(755,root,root) %{_sbindir}/*
+%attr(4750,root,adm) %{_sbindir}/*
 %attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/%{name}.conf
