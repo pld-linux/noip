@@ -7,7 +7,7 @@
 -#define CONFIG_FILEPATH		PREFIX"/etc"
 -#define CONFIG_FILENAME		PREFIX"/etc/no-ip2.conf"
 +#ifndef CONFIG_FILENAME
-+	#define CONFIG_FILENAME		PREFIX"etc/no-ip2.conf"
++	#define CONFIG_FILENAME		PREFIX"/etc/no-ip2.conf"
 +#endif
  #define CONFSTRLEN		1024
  #define MAX_DEVLEN		16
