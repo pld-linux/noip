@@ -1,3 +1,4 @@
+# TODO: init script, config file sample
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
 Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
