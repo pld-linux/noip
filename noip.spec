@@ -1,4 +1,4 @@
-# TODO: init script, config file sample
+# TODO: - initscript or sth. else
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
 Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
@@ -12,8 +12,6 @@ Source0:	http://www.no-ip.com/client/linux/%{name}-%{version}.tar.gz
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
 URL:		http://www.no-ip.com/
-Requires:	rc-scripts
-Requires(pre,post):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,31 +40,12 @@ rm -rf $RPM_BUILD_ROOT
 	PREFIX=%{_prefix} \
 	DESTDIR=$RPM_BUILD_ROOT
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.conf
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
-touch $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post
-/sbin/chkconfig --add %{name}
-if [ -f /var/lock/subsys/%{name} ]; then
-    /etc/rc.d/init.d/%{name} restart 1>&2
-else
-    echo "Run \"/etc/rc.d/init.d/%{name} start\" to start noip daemon."
-fi
-
-%preun
-if [ "$1" = "0" ]; then
-    if [ -f /var/lock/subsys/%{name} ]; then
-        /etc/rc.d/init.d/%{name} stop 1>&2
-    fi
-    /sbin/chkconfig --del %{name}
-fi
 
 %files
 %defattr(644,root,root,755)
 %doc README.FIRST
 %attr(755,root,root) %{_sbindir}/*
 %attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/%{name}.conf
-%attr(754,root,root) /etc/rc.d/init.d/%{name}
