@@ -1,6 +1,6 @@
 # TODO: - initscript or sth. else
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
-Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
+Summary(pl):	noip - Linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
 Version:	2.0.12
 Release:	0.1
@@ -15,10 +15,26 @@ URL:		http://www.no-ip.com/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-noip - Linux client for the no-ip.com dynamic DNS service.
+This is the No-IP.com Dynamic DNS update client page.
+
+When configured correctly, the client will check your IP address at a
+given time interval checking to see if your IP has changed. If your IP
+address has changed it will notify No-IP dns servers and update the IP
+corresponding to your No-IP/No-IP+ hostname.
+
+NOTE: You must add hostnames on the website first before you can have
+the updater update them.
 
 %description -l pl
-noip - linuksowy klient serwisu dynamicznego DNS no-ip.com .
+To jest klient aktualizujcy nasz wpisz w systemie No-IP.com
+
+Dobrze skonfigurowany klient bdzie sprawdza Twj adres IP w
+okrelonych odstpach czasu, aby wykry zmiany. Jeli adres IP si
+zmieni klient poinformuje serwery dns No-IP i zaktualizuje numer IP
+odnoszcy si do Twojej nazwy hosta w systemie No-IP/No-IP+.
+
+Uwaga: musisz doda nazwy hostw na stronie (http://www.no-ip.com)
+zanim bdziesz mg je aktualizowa za pomoc tego programu.
 
 %prep
 %setup -q
