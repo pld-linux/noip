@@ -19,22 +19,22 @@ This is the No-IP.com Dynamic DNS update client page.
 
 When configured correctly, the client will check your IP address at a
 given time interval checking to see if your IP has changed. If your IP
-address has changed it will notify No-IP dns servers and update the IP
+address has changed it will notify No-IP DNS servers and update the IP
 corresponding to your No-IP/No-IP+ hostname.
 
-NOTE: You must add hostnames on the website first before you can have
-the updater update them.
+NOTE: You must add hostnames on the website (http://www.no-ip.com)
+first before you can have the updater update them.
 
 %description -l pl
 To jest klient aktualizuj±cy nasz wpis w systemie No-IP.com
 
-Dobrze skonfigurowany klient bêdzie sprawdza³ Twój adres IP w
+Dobrze skonfigurowany klient bêdzie sprawdza³ dany adres IP w
 okre¶lonych odstêpach czasu, aby wykryæ zmiany. Je¶li adres IP siê
-zmieni, klient poinformuje serwery dns No-IP i zaktualizuje numer IP
-odnosz±cy siê do Twojej nazwy hosta w systemie No-IP/No-IP+.
+zmieni, klient poinformuje serwery DNS No-IP i zaktualizuje numer IP
+odnosz±cy siê do odpowiedniej nazwy hosta w systemie No-IP/No-IP+.
 
-Uwaga: musisz dodaæ nazwy hostów na stronie (http://www.no-ip.com)
-zanim bêdziesz móg³ je aktualizowaæ za pomoc tego programu.
+UWAGA: aktualizacja nazw hostów za pomoc± tego programu bêdzie mo¿liwa
+po ich dodaniu na stronie (http://www.no-ip.com).
 
 %prep
 %setup -q
