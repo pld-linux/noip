@@ -7,9 +7,8 @@ Release:	0.1
 Epoch:		0
 License:	GPL
 Group:		Networking/Daemons
-Source0:	http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+Source0:	http://test.mmt.pl/pld/noip/%{name}-%{version}.tar.gz
 # Source0-md5:	8eb89e31dd2c1fbbf91862efe67c99fd
-# Note:	8eb89e31dd2c1fbbf91862efe67c99fd stands for noip-2.1.1
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
 URL:		http://www.no-ip.com/
