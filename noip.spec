@@ -26,15 +26,15 @@ NOTE: You must add hostnames on the website first before you can have
 the updater update them.
 
 %description -l pl
-To jest klient aktualizujcy nasz wpisz w systemie No-IP.com
+To jest klient aktualizuj±cy nasz wpis w systemie No-IP.com
 
-Dobrze skonfigurowany klient bdzie sprawdza Twj adres IP w
-okrelonych odstpach czasu, aby wykry zmiany. Jeli adres IP si
-zmieni klient poinformuje serwery dns No-IP i zaktualizuje numer IP
-odnoszcy si do Twojej nazwy hosta w systemie No-IP/No-IP+.
+Dobrze skonfigurowany klient bêdzie sprawdza³ Twój adres IP w
+okre¶lonych odstêpach czasu, aby wykryæ zmiany. Je¶li adres IP siê
+zmieni, klient poinformuje serwery dns No-IP i zaktualizuje numer IP
+odnosz±cy siê do Twojej nazwy hosta w systemie No-IP/No-IP+.
 
-Uwaga: musisz doda nazwy hostw na stronie (http://www.no-ip.com)
-zanim bdziesz mg je aktualizowa za pomoc tego programu.
+Uwaga: musisz dodaæ nazwy hostów na stronie (http://www.no-ip.com)
+zanim bêdziesz móg³ je aktualizowaæ za pomoc tego programu.
 
 %prep
 %setup -q
