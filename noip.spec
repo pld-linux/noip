@@ -47,7 +47,7 @@ mv -f %{name}2.c %{name}.c
 %{__make} \
 	PREFIX=%{_prefix} CONFDIR=%{_sysconfdir} \
 	CC="%{__cc}" \
-	CCFLAGS="%{rpmcflags}"
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -7,7 +7,7 @@
 +
 +TGT=noip
  CC=gcc
-+CCFLAGS="-Wall -g -O2"
++CFLAGS="-Wall -g -O2"
  
  PREFIX=/usr/local
 -CONFDIR=${PREFIX}/etc
@@ -31,7 +31,7 @@
 -	${BINDIR}/${TGT} -C -Y -c /tmp/no-ip2.conf
 -	mv /tmp/no-ip2.conf ${CONFDIR}/no-ip2.conf
 +$(TGT): Makefile $(TGT).c 
-+	$(CC) $(CCFLAGS) -D$(ARCH) -DPREFIX=\"$(PREFIX)\" \
++	$(CC) $(CFLAGS) -D$(ARCH) -DPREFIX=\"$(PREFIX)\" \
 +		-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" $(TGT).c -o $(TGT) $(LIBS)
 +
 +install: $(TGT) 
