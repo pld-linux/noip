@@ -1,6 +1,6 @@
 # TODO: - initscript or sth. else
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
-Summary(pl):	noip - Linuksowy klient serwisu dynamicznego DNS no-ip.com
+Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
 Version:	2.0.12
 Release:	0.1
