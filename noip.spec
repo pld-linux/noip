@@ -3,7 +3,7 @@ Summary:	noip - Linux client for the no-ip.com dynamic DNS service
 Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
 Version:	2.1.1
-Release:	1
+Release:	3
 Epoch:		0
 License:	GPL
 Group:		Networking/Daemons
