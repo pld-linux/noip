@@ -1,5 +1,5 @@
 --- noip-2.0.12.orig/Makefile	Mon Oct  6 05:11:10 2003
-+++ noip-2.0.12/Makefile	Mon Oct  6 06:31:04 2003
++++ noip-2.0.12/Makefile	Mon Oct  6 07:15:44 2003
 @@ -1,9 +1,13 @@
 -TGT=noip2
 +DESTDIR = 
@@ -13,11 +13,11 @@
 -CONFDIR=${PREFIX}/etc
 -BINDIR=${PREFIX}/bin
 +CONFDIR=$(PREFIX)/etc
-+BINDIR=$(PREFIX)/bin
++SBINDIR=$(PREFIX)/sbin
  
  # these defines are for Linux
  LIBS=
-@@ -20,20 +24,19 @@
+@@ -20,20 +24,20 @@
  # LIBS=-lsocket -lnsl
  # ARCH=sun
  
@@ -35,9 +35,10 @@
 +		-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" $(TGT).c -o $(TGT) $(LIBS)
 +
 +install: $(TGT) 
-+	if [ ! -d $(DESTDIR)$(BINDIR) ]; then install -d $(DESTDIR)$(BINDIR);fi
++	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then install -d $(DESTDIR)$(SBINDIR);fi
 +	if [ ! -d $(DESTDIR)$(CONFDIR) ]; then install -d $(DESTDIR)$(CONFDIR);fi
-+	cp $(TGT) $(DESTDIR)$(BINDIR)/$(TGT)
++	if [ ! -d $(DESTDIR)/tmp ]; then install -d $(DESTDIR)/tmp;fi
++	cp $(TGT) $(DESTDIR)$(SBINDIR)/$(TGT)
  
 -package: ${TGT}
 -	mv ${TGT} binaries/${TGT}-`uname -s`
