@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+# nopi		Start/Stop the no-ip.com client.
+#
+# chkconfig:	2345 15 89
+#
+# description:	When configured correctly, the client will check your IP \
+#		address at a given time interval checking to see if your IP \
+#		has changed. If your IP address has changed it will notify \
+#		No-IP DNS servers and update the IP corresponding to your \
+#		No-IP/No-IP+ hostname.
+#
+# processname:	noip
+# config:	/etc/noip
+# pidfile:	/var/run/noip.pid # don't know if it's true
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+case "$1" in
+  start)
+	if [ "x`grep -vE "/^$/" /etc/noip.conf`" = "x" ]; then
+		echo "You should first run $0 config to prepare configuration";
+		exit 3
+	fi
+	if [ ! -f /var/lock/subsys/noip ]; then
+		msg_starting noip
+		daemon noip
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/noip
+	else
+		msg_already_runing noip
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/noip ]; then
+		msg_stopping noip
+		killproc noip
+		rm -f /var/lock/subsys/noip > /dev/null 2>&1
+	else
+		msg_not_running noip
+	fi
+	;;
+  restart)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  config)
+  	noip -C
+  	;;
+  *)
+	msg_usage "$0 {start|stop|restart|config}"
+	exit 3
+	;;
+esac
+
+exit $RETVAL
