@@ -12,8 +12,8 @@ Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
 URL:		http://www.no-ip.com/
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -83,6 +83,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README.FIRST
-%attr(0754,root,root) /etc/rc.d/init.d/noip
+%attr(754,root,root) /etc/rc.d/init.d/noip
 %attr(4750,root,adm) %{_sbindir}/*
-%attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/%{name}.conf
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
