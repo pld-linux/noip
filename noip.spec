@@ -12,6 +12,7 @@ Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
 URL:		http://www.no-ip.com/
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -66,17 +67,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add noip
-if [ -f /var/lock/subsys/noip ]; then
-        /etc/rc.d/init.d/noip restart >&2
-else
-        echo "Run \"/etc/rc.d/init.d/noip start\" to start noip client daemon."
-fi
+%service noip restart "noip client daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/noip ]; then
-		/etc/rc.d/init.d/noip stop >&2
-	fi
+	%service noip stop
 	/sbin/chkconfig --del noip
 fi
 
@@ -84,5 +79,5 @@ fi
 %defattr(644,root,root,755)
 %doc README.FIRST
 %attr(754,root,root) /etc/rc.d/init.d/noip
-%attr(4750,root,adm) %{_sbindir}/*
+%attr(4750,root,adm) %{_sbindir}/noip
 %attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
