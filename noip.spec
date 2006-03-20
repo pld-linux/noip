@@ -48,17 +48,20 @@ mv -f %{name}2.c %{name}.c
 %build
 
 %{__make} \
-	PREFIX=%{_prefix} CONFDIR=%{_sysconfdir} \
+	PREFIX=%{_prefix} \
+	CONFDIR=%{_sysconfdir} \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+
 %{__make} install \
 	CONFDIR=%{_sysconfdir} \
 	PREFIX=%{_prefix} \
 	DESTDIR=$RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/noip
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.conf
 
