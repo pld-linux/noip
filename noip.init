@@ -47,11 +47,12 @@ case "$1" in
 	$0 start
 	exit $?
 	;;
-  config)
+  config|status)
   	noip -C
+	noip -S
   	;;
   *)
-	msg_usage "$0 {start|stop|restart|config}"
+	msg_usage "$0 {start|stop|restart|config|status}"
 	exit 3
 	;;
 esac
