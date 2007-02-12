@@ -2,7 +2,7 @@
 # - noip shouldn't be run with nobody priviledes - it owns noip.conf.
 #   Maybe it would be nice to use daemon user?
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
-Summary(pl):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
+Summary(pl.UTF-8):   noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
 Version:	2.1.1
 Release:	5
@@ -31,15 +31,15 @@ corresponding to your No-IP/No-IP+ hostname.
 NOTE: You must add hostnames on the website (http://www.no-ip.com)
 first before you can have the updater update them.
 
-%description -l pl
-To jest klient aktualizuj±cy nasz wpis w systemie No-IP.com
+%description -l pl.UTF-8
+To jest klient aktualizujÄ…cy nasz wpis w systemie No-IP.com
 
-Dobrze skonfigurowany klient bêdzie sprawdza³ dany adres IP w
-okre¶lonych odstêpach czasu, aby wykryæ zmiany. Je¶li adres IP siê
+Dobrze skonfigurowany klient bÄ™dzie sprawdzaÅ‚ dany adres IP w
+okreÅ›lonych odstÄ™pach czasu, aby wykryÄ‡ zmiany. JeÅ›li adres IP siÄ™
 zmieni, klient poinformuje serwery DNS No-IP i zaktualizuje numer IP
-odnosz±cy siê do odpowiedniej nazwy hosta w systemie No-IP/No-IP+.
+odnoszÄ…cy siÄ™ do odpowiedniej nazwy hosta w systemie No-IP/No-IP+.
 
-UWAGA: aktualizacja nazw hostów za pomoc± tego programu bêdzie mo¿liwa
+UWAGA: aktualizacja nazw hostÃ³w za pomocÄ… tego programu bÄ™dzie moÅ¼liwa
 po ich dodaniu na stronie (http://www.no-ip.com).
 
 %prep
