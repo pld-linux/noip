@@ -17,9 +17,7 @@
 # Source function library
 . /etc/rc.d/init.d/functions
 
-RETVAL=0
-case "$1" in
-  start)
+start() {
 	if [ ! -s /etc/noip.conf ]; then
 		echo "You should first run $0 config to prepare configuration";
 		exit 3
@@ -32,8 +30,9 @@ case "$1" in
 	else
 		msg_already_runing noip
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/noip ]; then
 		msg_stopping noip
 		killproc noip
@@ -41,11 +40,19 @@ case "$1" in
 	else
 		msg_not_running noip
 	fi
+}
+
+RETVAL=0
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   restart)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   config|status)
   	noip -C
