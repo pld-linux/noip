@@ -1,5 +1,5 @@
---- noip-2.0.12.orig/Makefile	Mon Oct  6 05:11:10 2003
-+++ noip-2.0.12/Makefile	Mon Oct  6 07:15:44 2003
+--- noip-2.1.7/Makefile.orig	2007-08-11 20:35:34.000000000 +0200
++++ noip-2.1.7/Makefile	2008-08-18 19:21:53.000000000 +0200
 @@ -1,9 +1,13 @@
 -TGT=noip2
 +DESTDIR = 
@@ -17,23 +17,22 @@
  
  # these defines are for Linux
  LIBS=
-@@ -20,20 +24,20 @@
+@@ -20,23 +24,23 @@
  # LIBS=-lsocket -lnsl
  # ARCH=sun
  
 -${TGT}: Makefile ${TGT}.c 
 -	${CC} -Wall -g -O2 -D${ARCH} -DPREFIX=\"${PREFIX}\" ${TGT}.c -o ${TGT} ${LIBS}
--
++$(TGT): Makefile $(TGT).c 
++	$(CC) $(CFLAGS) -D$(ARCH) -DPREFIX=\"$(PREFIX)\" \
++		-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" $(TGT).c -o $(TGT) $(LIBS)
+ 
 -install: ${TGT} 
 -	if [ ! -d ${BINDIR} ]; then mkdir -p ${BINDIR};fi
 -	if [ ! -d ${CONFDIR} ]; then mkdir -p ${CONFDIR};fi
 -	cp ${TGT} ${BINDIR}/${TGT}
--	${BINDIR}/${TGT} -C -Y -c /tmp/no-ip2.conf
+-	${BINDIR}/${TGT} -C -c /tmp/no-ip2.conf
 -	mv /tmp/no-ip2.conf ${CONFDIR}/no-ip2.conf
-+$(TGT): Makefile $(TGT).c 
-+	$(CC) $(CFLAGS) -D$(ARCH) -DPREFIX=\"$(PREFIX)\" \
-+		-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" $(TGT).c -o $(TGT) $(LIBS)
-+
 +install: $(TGT) 
 +	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then install -d $(DESTDIR)$(SBINDIR);fi
 +	if [ ! -d $(DESTDIR)$(CONFDIR) ]; then install -d $(DESTDIR)$(CONFDIR);fi
@@ -41,12 +40,16 @@
 +	cp $(TGT) $(DESTDIR)$(SBINDIR)/$(TGT)
  
 -package: ${TGT}
--	mv ${TGT} binaries/${TGT}-`uname -s`
 +package: $(TGT)
-+	mv $(TGT) binaries/$(TGT)-`uname -s`
- 	cd ..; tar zcvf /tmp/noip-2.0.tgz noip-2.0/*
+ 	rm  -f *.bak
+-	mv ${TGT} binaries/${TGT}-`uname -s`-32bit
+-	rcp gemini:/local/src/noip-2.0/${TGT} binaries/${TGT}-`uname -s`-64bit
++	mv $(TGT) binaries/$(TGT)-`uname -s`-32bit
++	rcp gemini:/local/src/noip-2.0/$(TGT) binaries/$(TGT)-`uname -s`-64bit
+ 	cd ..; tar zcvf /tmp/noip-2.1.tgz noip-2.0/*
  
  clean: 
  	rm -f *o
 -	rm -f ${TGT}
 +	rm -f $(TGT)
+ 	rm -f binaries/*
