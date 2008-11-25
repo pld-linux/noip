@@ -1,55 +1,38 @@
---- noip-2.1.7/Makefile.orig	2007-08-11 20:35:34.000000000 +0200
-+++ noip-2.1.7/Makefile	2008-08-18 19:21:53.000000000 +0200
-@@ -1,9 +1,13 @@
+--- noip-2.1.9/Makefile.orig	2008-11-21 23:27:15.000000000 +0100
++++ noip-2.1.9/Makefile	2008-11-25 08:36:44.392738218 +0100
+@@ -1,10 +1,12 @@
 -TGT=noip2
-+DESTDIR = 
-+CONFDIR =
-+
 +TGT=noip
  CC=gcc
 +CFLAGS="-Wall -g -O2"
+ PKG=noip-2.1.tgz
  
  PREFIX=/usr/local
--CONFDIR=${PREFIX}/etc
+ CONFDIR=${PREFIX}/etc
 -BINDIR=${PREFIX}/bin
-+CONFDIR=$(PREFIX)/etc
-+SBINDIR=$(PREFIX)/sbin
++SBINDIR=${PREFIX}/sbin
++DESTDIR=
  
  # these defines are for Linux
  LIBS=
-@@ -20,23 +24,23 @@
- # LIBS=-lsocket -lnsl
+@@ -22,14 +24,14 @@
  # ARCH=sun
  
--${TGT}: Makefile ${TGT}.c 
--	${CC} -Wall -g -O2 -D${ARCH} -DPREFIX=\"${PREFIX}\" ${TGT}.c -o ${TGT} ${LIBS}
-+$(TGT): Makefile $(TGT).c 
-+	$(CC) $(CFLAGS) -D$(ARCH) -DPREFIX=\"$(PREFIX)\" \
-+		-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" $(TGT).c -o $(TGT) $(LIBS)
+ ${TGT}: Makefile ${TGT}.c 
+-	${CC} -Wall -g -D${ARCH} -DPREFIX=\"${PREFIX}\" ${TGT}.c -o ${TGT} ${LIBS}
++	${CC} $(CFLAGS) -D${ARCH} -DPREFIX=\"${PREFIX}\" \
++	-DCONFIG_FILENAME=\"$(CONFDIR)/noip.conf\" ${TGT}.c -o ${TGT} ${LIBS}
  
--install: ${TGT} 
+ install: ${TGT} 
 -	if [ ! -d ${BINDIR} ]; then mkdir -p ${BINDIR};fi
 -	if [ ! -d ${CONFDIR} ]; then mkdir -p ${CONFDIR};fi
 -	cp ${TGT} ${BINDIR}/${TGT}
 -	${BINDIR}/${TGT} -C -c /tmp/no-ip2.conf
 -	mv /tmp/no-ip2.conf ${CONFDIR}/no-ip2.conf
-+install: $(TGT) 
-+	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then install -d $(DESTDIR)$(SBINDIR);fi
-+	if [ ! -d $(DESTDIR)$(CONFDIR) ]; then install -d $(DESTDIR)$(CONFDIR);fi
++	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then mkdir -p $(DESTDIR)$(SBINDIR);fi
++	if [ ! -d $$(DESTDIR)$(CONFDIR) ]; then mkdir -p $(DESTDIR)$(CONFDIR);fi
 +	if [ ! -d $(DESTDIR)/tmp ]; then install -d $(DESTDIR)/tmp;fi
-+	cp $(TGT) $(DESTDIR)$(SBINDIR)/$(TGT)
++	cp ${TGT} $(DESTDIR)$(SBINDIR)/${TGT}
  
--package: ${TGT}
-+package: $(TGT)
+ package: ${TGT}
  	rm  -f *.bak
--	mv ${TGT} binaries/${TGT}-`uname -s`-32bit
--	rcp gemini:/local/src/noip-2.0/${TGT} binaries/${TGT}-`uname -s`-64bit
-+	mv $(TGT) binaries/$(TGT)-`uname -s`-32bit
-+	rcp gemini:/local/src/noip-2.0/$(TGT) binaries/$(TGT)-`uname -s`-64bit
- 	cd ..; tar zcvf /tmp/noip-2.1.tgz noip-2.0/*
- 
- clean: 
- 	rm -f *o
--	rm -f ${TGT}
-+	rm -f $(TGT)
- 	rm -f binaries/*
