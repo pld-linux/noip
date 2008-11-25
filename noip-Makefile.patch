@@ -29,8 +29,8 @@
 -	cp ${TGT} ${BINDIR}/${TGT}
 -	${BINDIR}/${TGT} -C -c /tmp/no-ip2.conf
 -	mv /tmp/no-ip2.conf ${CONFDIR}/no-ip2.conf
-+	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then mkdir -p $(DESTDIR)$(SBINDIR);fi
-+	if [ ! -d $$(DESTDIR)$(CONFDIR) ]; then mkdir -p $(DESTDIR)$(CONFDIR);fi
++	if [ ! -d $(DESTDIR)$(SBINDIR) ]; then install -d $(DESTDIR)$(SBINDIR);fi
++	if [ ! -d $$(DESTDIR)$(CONFDIR) ]; then install -d $(DESTDIR)$(CONFDIR);fi
 +	if [ ! -d $(DESTDIR)/tmp ]; then install -d $(DESTDIR)/tmp;fi
 +	cp ${TGT} $(DESTDIR)$(SBINDIR)/${TGT}
  
