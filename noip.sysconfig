@@ -1,0 +1,6 @@
+# configuration for noip
+
+# you can specify options for noip here (see 'noip -h')
+# example: OPTIONS="-I eth1"
+OPTIONS=""
+

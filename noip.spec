@@ -2,12 +2,13 @@ Summary:	noip - Linux client for the no-ip.com dynamic DNS service
 Summary(pl.UTF-8):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
 Version:	2.1.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://www.no-ip.com/client/linux/%{name}-duc-linux.tar.gz
 # Source0-md5:	eed8e9ef9edfb7ddc36e187de867fe64
 Source1:	%{name}.init
+Source2:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
 URL:		http://www.no-ip.com/
@@ -54,14 +55,16 @@ mv -f %{name}2.c %{name}.c
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 %{__make} install \
 	CONFDIR=%{_sysconfdir} \
 	PREFIX=%{_prefix} \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/noip
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
+
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.conf
 
 %clean
@@ -80,7 +83,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README.FIRST
-%attr(754,root,root) /etc/rc.d/init.d/noip
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(4750,root,adm) %{_sbindir}/noip
-# FIXME!!!!
-%attr(600,nobody,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}.conf
+%attr(754,root,root) /etc/rc.d/init.d/%{name}
