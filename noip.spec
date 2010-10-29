@@ -1,6 +1,3 @@
-# TODO:
-# - noip shouldn't be run with nobody priviledes - it owns noip.conf.
-#   Maybe it would be nice to use daemon user?
 Summary:	noip - Linux client for the no-ip.com dynamic DNS service
 Summary(pl.UTF-8):	noip - linuksowy klient serwisu dynamicznego DNS no-ip.com
 Name:		noip
