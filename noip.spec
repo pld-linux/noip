@@ -2,7 +2,7 @@ Summary:	noip - Linux client for the noip.com dynamic DNS service
 Summary(pl.UTF-8):	noip - linuksowy klient serwisu dynamicznego DNS noip.com
 Name:		noip
 Version:	2.1.9
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://www.noip.com/client/linux/%{name}-duc-linux.tar.gz
@@ -11,6 +11,7 @@ Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-config_location.patch
+Patch2:		format-security.patch
 URL:		http://www.noip.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
@@ -44,6 +45,7 @@ po ich dodaniu na stronie <http://www.noip.com>.
 %patch0 -p1
 %patch1 -p1
 %{__mv} %{name}2.c %{name}.c
+%patch2 -p1
 
 %build
 %{__make} \
