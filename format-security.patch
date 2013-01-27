@@ -1,11 +1,11 @@
---- noip-2.1.9/noip2.c~	2013-07-21 12:12:24.198506916 +0200
-+++ noip-2.1.9/noip2.c	2013-07-21 12:13:03.495541538 +0200
+--- noip-2.1.9/noip.c~	2013-01-27 13:48:06.000000000 +0200
++++ noip-2.1.9/noip.c	2013-01-27 13:48:09.089813252 +0200
 @@ -1005,7 +1005,7 @@
  	my_instance->debug = debug;
  	my_instance->interval = interval;
  	my_instance->version = put_version(VERSION);
 -	sprintf(my_instance->Last_IP_Addr, new_config->lastIP);
-+	sprintf(my_instance->Last_IP_Addr, "%s", new_config->lastIP);
++	strcpy(my_instance->Last_IP_Addr, new_config->lastIP);
  	sprintf(my_instance->args, "%s", saved_args);
  	sprintf(my_instance->cfilename, "%s", config_filename);
  	return SUCCESS;
@@ -14,7 +14,7 @@
          va_end(ap);
  
 -	fprintf(stderr, msg);
-+	fprintf(stderr, "%s", msg);
++	fputs(msg, stderr);
          tcgetattr(0,&argin);
          argout = argin;                                                        
          argout.c_lflag &= ~(ICANON);
