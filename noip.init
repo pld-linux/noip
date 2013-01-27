@@ -24,7 +24,7 @@ fi
 
 start() {
 	if [ -f /var/lock/subsys/noip ]; then
-		msg_already_runing noip
+		msg_already_running noip
 		return
 	fi
 
