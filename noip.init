@@ -23,28 +23,31 @@ if [ -f /etc/sysconfig/noip ]; then
 fi
 
 start() {
+	if [ -f /var/lock/subsys/noip ]; then
+		msg_already_runing noip
+		return
+	fi
+
 	if [ ! -s /etc/noip.conf ]; then
 		echo "You should first run $0 config to prepare configuration";
 		exit 3
 	fi
-	if [ ! -f /var/lock/subsys/noip ]; then
-		msg_starting noip
-		daemon noip $OPTIONS
-		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/noip
-	else
-		msg_already_runing noip
-	fi
+
+	msg_starting noip
+	daemon /usr/sbin/noip $OPTIONS
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/noip
 }
 
 stop() {
-	if [ -f /var/lock/subsys/noip ]; then
-		msg_stopping noip
-		killproc noip
-		rm -f /var/lock/subsys/noip > /dev/null 2>&1
-	else
+	if [ ! -f /var/lock/subsys/noip ]; then
 		msg_not_running noip
+		return
 	fi
+
+	msg_stopping noip
+	killproc noip
+	rm -f /var/lock/subsys/noip > /dev/null 2>&1
 }
 
 RETVAL=0
