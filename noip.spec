@@ -44,8 +44,8 @@ po ich dodaniu na stronie <http://www.noip.com>.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%{__mv} %{name}2.c %{name}.c
 %patch2 -p1
+%{__mv} %{name}2.c %{name}.c
 
 %build
 %{__make} \
