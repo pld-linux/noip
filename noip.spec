@@ -42,9 +42,9 @@ po ich dodaniu na stronie <http://www.noip.com>.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 %{__mv} %{name}2.c %{name}.c
 
 %build
